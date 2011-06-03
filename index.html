@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        position: relative;
+        cursor: none !important;
+      }
+      #content {
+        text-align: center;
+        margin: auto;
+        width: 100%;
+        height: 100%;
+      }
+      a, img {
+        border: none;
+      }
+      img#cursor {
+        position: absolute;
+      }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.6.min.js"></script>
+    <script>
+      $(function() {
+        $(document).mousemove(function(e) {
+          $('img#cursor').remove().appendTo('body').css({
+            display: 'block',
+            left: (e.pageX - 12) + 'px',
+            top: (e.pageY - 12) + 'px'
+          });
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="content">
+      <a class="like-button" href="#"><img id="like" src="./like.png"></a>
+      <img id="cursor" src="./cursor.png" style="display: none">
+    </div>
+  </body>
+</html>
