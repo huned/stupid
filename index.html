@@ -5,7 +5,7 @@
       body {
         position: relative;
         overflow: hidden;
-        cursor: url(./fake-cursor.gif), auto;
+        cursor: url(./fake-cursor.gif), auto !important;
       }
       #content {
         text-align: center;
@@ -20,22 +20,39 @@
         position: absolute;
       }
     </style>
-    <script src="http://code.jquery.com/jquery-1.6.min.js"></script>
-    <script>
-      $(function() {
-        $(document).mousemove(function(e) {
-          $('img#cursor').remove().appendTo('body').css({
-            display: 'block',
-            left: (e.pageX - 12) + 'px',
-            top: (e.pageY - 12) + 'px'
-          });
-        });
-      });
-    </script>
   </head>
   <body>
     <div id="content">
-      <img id="cursor" src="./cursor.png" style="display: none">
+      <a href="#"><img id="button" src="./like.png" alt="omg ultra like!!!"></a>
+      <img id="cursor" src="./cursor.png" style="display: none; width: 180px; height: 315px">
     </div>
   </body>
+  <script src="http://code.jquery.com/jquery-1.6.min.js"></script>
+  <script>
+    $(function() {
+      $(document).mousemove(function(e) {
+        $('img#cursor').remove().appendTo('body').css({
+          display: 'block',
+          left: (e.pageX - 12) + 'px',
+          top: (e.pageY - 12) + 'px'
+        });
+      });
+
+      var button = $('#button')
+        , position = button.position()
+        , minX = position.left
+        , maxX = position.left + button.width()
+        , minY = position.top
+        , maxY = position.top + button.height();
+
+      $(document).click(function(e) {
+        if (e.pageX >= minX && e.pageX <= maxX &&
+            e.pageY >= minY && e.pageY <= maxY) {
+          // TODO dumb stuff goes here console.log("click!");
+        }
+        e.preventDefault();
+        return false;
+      });
+    });
+  </script>
 </html>
